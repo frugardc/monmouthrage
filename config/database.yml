@@ -5,12 +5,13 @@
 #   gem 'sqlite3'
 development:
   adapter: postgis
-  database: rage
-  username: postgres
-  password:
-  host: localhost
+  database: d4eals1alojl02
+  username: jhbdpmdnogvmim
+  password: wlaXYStPtV-xJlNpa_ZCpn7iSU
+  host: ec2-54-235-254-56.compute-1.amazonaws.com
   pool: 500
   timeout: 5000
+  sslmode: "require"
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -23,13 +24,15 @@ test:
   host: localhost
   pool: 500
   timeout: 5000
+  sslmode: "require"
 
 
 production:
   adapter: postgis
-  database: rage
-  username: postgres
-  password:
-  host: localhost
+  database: d4eals1alojl02
+  username: jhbdpmdnogvmim
+  password: wlaXYStPtV-xJlNpa_ZCpn7iSU
+  host: ec2-54-235-254-56.compute-1.amazonaws.com
   pool: 500
   timeout: 5000
+  sslmode: "require"
