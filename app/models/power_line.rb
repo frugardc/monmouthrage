@@ -1,8 +1,9 @@
 class PowerLine < ActiveRecord::Base
   GEO_FACTORY = RGeo::Geographic.spherical_factory(srid: 4326)
   set_rgeo_factory_for_column :geom, GEO_FACTORY
+  default_scope :select => "*,st_astext(geom) as wkt"
   def to_placemark(mapid="map")
-    points = geom.to_s.gsub(/[A-Z()]/i,"").split(",").collect{|p| p.split(" ")}
+    points = wkt.to_s.gsub(/[A-Z()]/i,"").split(",").collect{|p| p.split(" ")}
     point_strings = points.collect{|p| "{lat: #{p[1]},lng: #{p[0]}}"}
     str = "var path = [
       #{point_strings.join(",")}
