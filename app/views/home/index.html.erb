@@ -7,23 +7,34 @@
         <li role="presentation"><a href="#">Contact</a></li>
       </ul>
     </nav>
-    <h3 class="text-muted">Project name</h3>
   </div>
 
   <div class="jumbotron">
-    <h1>Jumbotron heading</h1>
+    <h2>Giant Electric Distance Estimation</h2>
     <div id="googleMap" style="width:900px;height:380px;"></div>
-    <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-    Copy
+    <% unless @result %>
+      <p class="lead">Wonder how close you really are?  Enter your address below and click "Enter"</p>
+    <% else %>
+      <p class="lead">You are approximately XX feet from the proposed Power Lines.</p>
+    <% end %>
     <div class="row">
-      <div class="col-lg-6">
+      <div class="col-lg-10">
+      <form action="/home/index" method="GET">
         <div class="input-group">
-          <span class="input-group-btn">
-            <button class="btn btn-default" type="button">Estimate Distance:</button>
-          </span>
-          <input type="text" class="form-control" placeholder="My Address...">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit">Estimate Distance:</button>
+            </span>
+            <input type="text" name="address" class="form-control" placeholder="My Address..." value="<%= @result ? @result.address : '' %>">
+            <% if @result %>
+            <span class="input-group-btn">
+              <button class="btn btn-default clip-btn" type="button" data-clipboard-text="<%= @full_url %>">
+                  Copy Link to Share
+              </button>
+            </span>
+            <% end %>
         </div><!-- /input-group -->
       </div><!-- /.col-lg-6 -->
+    </form>
     </div><!-- /.row -->
   </div>
 
@@ -56,15 +67,43 @@
   </footer>
 
 </div> <!-- /container -->
-<%= @result.address %>
 <script>
 function initialize() {
   var mapProp = {
     center:new google.maps.LatLng(40.38915,-74.11643),
     zoom:12,
-    mapTypeId:google.maps.MapTypeId.ROADMAP
+    mapTypeId:google.maps.MapTypeId.HYBRID
   };
   var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+  <%= raw(@power_line.to_placemark)%>
+  <% if @result %>
+    var marker = new google.maps.Marker({
+            position: new google.maps.LatLng( <%= @result.latitude%>,<%=@result.longitude %>),
+            map: map,
+            title: '<%= @result.address %>'
+        });
+
+    var contentString = '<div id="content"><h1><%= @result.address %></h1></div>';
+      var infowindow = new google.maps.InfoWindow({
+                content: contentString
+      });
+    <%= raw(@power_line.to_distance_placemark(@result.latitude,@result.longitude)) %>
+
+
+    google.maps.event.addListener(marker, 'click', function() {
+              infowindow.open(map,marker);
+            });
+    var clipboard = new Clipboard('.clip-btn');
+
+    clipboard.on('success', function(e) {
+    	console.log(e);
+    });
+
+    clipboard.on('error', function(e) {
+        console.log(e);
+    });
+  <% end %>
 }
 google.maps.event.addDomListener(window, 'load', initialize);
+
 </script>
