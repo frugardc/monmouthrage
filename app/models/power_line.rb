@@ -42,7 +42,7 @@ class PowerLine < ActiveRecord::Base
     powerPath4.setMap(#{mapid});"
   end
 
-  def to_distance_placemark(lat,lng,mapid="map")
+  def to_distance_placemark(lat,lng,zoomto=false,mapid="map")
     calcs = connection.select_rows("SELECT ST_AsText(st_transform(ST_ClosestPoint(foo.pt,foo.geom),4326)) AS cp_pt_line,
       	ST_AsText(st_transform(ST_ClosestPoint(foo.geom,foo.pt),4326)) As cp_line_pt
       FROM (SELECT st_transform(ST_PointFromText('POINT(#{lng} #{lat})',4326),3857) As pt,
@@ -62,12 +62,15 @@ class PowerLine < ActiveRecord::Base
       strokeWeight: 4
     });
     distanceLine.setMap(#{mapid});
-    var bounds = new google.maps.LatLngBounds();
-    for (var i in distancePath) {
-      var latlng = new google.maps.LatLng(distancePath[i].lat, distancePath[i].lng);
-      bounds.extend(latlng);
-    }
-    map.fitBounds(bounds);"
+    "
+    if zoomto
+      str = str + "var bounds = new google.maps.LatLngBounds();
+      for (var i in distancePath) {
+        var latlng = new google.maps.LatLng(distancePath[i].lat, distancePath[i].lng);
+        bounds.extend(latlng);
+      }
+      map.fitBounds(bounds);"
+    end
     [str,distance]
   end
 

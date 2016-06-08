@@ -76,23 +76,39 @@ function initialize() {
   };
   var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
   <%= raw(@power_line.to_placemark)%>
+  <% @schools_data.each do |school_data| %>
+      <% school = school_data[0] %>
+      <% school_line_string = school_data[1][0] %>
+      <% school_distance = school_data[1][1] %>
+      var schoolMarker<%= school.id %> = new google.maps.Marker({
+          position: new google.maps.LatLng( <%= school.geom.first.latitude%>,<%=school.geom.first.longitude %>),
+          map: map,
+          title: '<%= school.name %>',
+          icon: 'electric.png'
+      });
+        var contentString<%= school.id %> = '<div id="content"><h4><%= school.name %></h4></div>';
+        var infowindow<%= school.id %> = new google.maps.InfoWindow({
+                  content: contentString<%= school.id %>
+        });
+      google.maps.event.addListener(schoolMarker<%= school.id %>, 'click', function() {
+                infowindow<%= school.id %>.open(map,schoolMarker<%= school.id %>);
+      });
+      <%= raw(school_line_string) %>
+  <% end %>
   <% if @result %>
     var marker = new google.maps.Marker({
             position: new google.maps.LatLng( <%= @result.latitude%>,<%=@result.longitude %>),
             map: map,
             title: '<%= @result.address %>'
         });
-
-    var contentString = '<div id="content"><h1><%= @result.address %></h1></div>';
+    var contentString = '<div id="content"><h4><%= @result.address %></h4></div>';
       var infowindow = new google.maps.InfoWindow({
                 content: contentString
       });
     <%= raw(@power_line_string) %>
-
-
     google.maps.event.addListener(marker, 'click', function() {
               infowindow.open(map,marker);
-            });
+    });
     var clipboard = new Clipboard('.clip-btn');
 
     clipboard.on('success', function(e) {
