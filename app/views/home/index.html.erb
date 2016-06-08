@@ -81,7 +81,7 @@ function initialize() {
       <% school_line_string = school_data[1][0] %>
       <% school_distance = school_data[1][1] %>
       var schoolMarker<%= school.id %> = new google.maps.Marker({
-          position: new google.maps.LatLng( <%= school.geom.first.latitude%>,<%=school.geom.first.longitude %>),
+          position: new google.maps.LatLng( <%= school.location.latitude%>,<%=school.location.longitude %>),
           map: map,
           title: '<%= school.name %>',
           icon: 'electric.png'
