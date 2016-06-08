@@ -15,11 +15,11 @@
     <% unless @result %>
       <p class="lead">Wonder how close you really are?  Enter your address below and click "Enter"</p>
     <% else %>
-      <p class="lead">You are approximately XX feet from the proposed Power Lines.</p>
+      <p class="lead">You are approximately <%= @power_line_distance %> feet from the proposed Power Lines.</p>
     <% end %>
     <div class="row">
       <div class="col-lg-10">
-      <form action="/home/index" method="GET">
+      <form action="/" method="GET">
         <div class="input-group">
             <span class="input-group-btn">
               <button class="btn btn-default" type="submit">Estimate Distance:</button>
@@ -87,7 +87,7 @@ function initialize() {
       var infowindow = new google.maps.InfoWindow({
                 content: contentString
       });
-    <%= raw(@power_line.to_distance_placemark(@result.latitude,@result.longitude)) %>
+    <%= raw(@power_line_string) %>
 
 
     google.maps.event.addListener(marker, 'click', function() {

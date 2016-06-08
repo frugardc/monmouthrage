@@ -8,15 +8,38 @@ class PowerLine < ActiveRecord::Base
     str = "var path = [
       #{point_strings.join(",")}
     ];
+    var powerPath4 = new google.maps.Polyline({
+      path: path,
+      geodesic: true,
+      strokeColor: '#00FFFF',
+      strokeOpacity: 1.0,
+      strokeWeight: 18
+    });
     var powerPath = new google.maps.Polyline({
       path: path,
       geodesic: true,
       strokeColor: '#FF0000',
       strokeOpacity: 1.0,
+      strokeWeight: 10
+    });
+    var powerPath2 = new google.maps.Polyline({
+      path: path,
+      geodesic: true,
+      strokeColor: '#FFFF00',
+      strokeOpacity: 1.0,
       strokeWeight: 6
     });
-
-    powerPath.setMap(#{mapid});"
+    var powerPath3 = new google.maps.Polyline({
+      path: path,
+      geodesic: true,
+      strokeColor: '#00FFFF',
+      strokeOpacity: 1.0,
+      strokeWeight: 2
+    });
+    powerPath.setMap(#{mapid});
+    powerPath2.setMap(#{mapid});
+    powerPath3.setMap(#{mapid});
+    powerPath4.setMap(#{mapid});"
   end
 
   def to_distance_placemark(lat,lng,mapid="map")
@@ -26,6 +49,7 @@ class PowerLine < ActiveRecord::Base
       		st_transform(st_setsrid(geom,4326),3857) as geom from power_lines where power_lines.id = 1
       	) foo;")
     points = calcs.flatten.collect{|point| point.gsub(/[A-Z()]/i,"").split(" ")}
+    distance = (PowerLine.length(points) * 3.28084).to_i
     point_strings = points.collect{|p| "{lat: #{p[1]},lng: #{p[0]}}"}
     str = "var distancePath = [
       #{point_strings.join(",")}
@@ -44,5 +68,10 @@ class PowerLine < ActiveRecord::Base
       bounds.extend(latlng);
     }
     map.fitBounds(bounds);"
+    [str,distance]
+  end
+
+  def self.length(points)
+    connection.select_rows("select st_length(st_transform(ST_GeomFromText('LINESTRING(#{points[0][0]} #{points[0][1]},#{points[1][0]} #{points[1][1]})',4326),2163))").flatten.first.to_f
   end
 end
