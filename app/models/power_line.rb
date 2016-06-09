@@ -32,7 +32,7 @@ class PowerLine < ActiveRecord::Base
     var powerPath3 = new google.maps.Polyline({
       path: path,
       geodesic: true,
-      strokeColor: '#00FFFF',
+      strokeColor: '#FF0000',
       strokeOpacity: 1.0,
       strokeWeight: 2
     });

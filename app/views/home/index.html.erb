@@ -10,12 +10,12 @@
   </div>
 
   <div class="jumbotron">
-    <h2>Giant Electric Distance Estimation</h2>
+    <h2>Giant Electric Impact</h2>
     <div id="googleMap" style="width:900px;height:380px;"></div>
     <% unless @result %>
       <p class="lead">Wonder how close you really are?  Enter your address below and click "Enter"</p>
     <% else %>
-      <p class="lead">You are approximately <%= @power_line_distance %> feet from the proposed Power Lines.</p>
+      <p class="lead">Your location approximately <%= @power_line_distance %> feet from the proposed 270 Kilovolt Power Lines</p>
     <% end %>
     <div class="row">
       <div class="col-lg-10">
@@ -86,7 +86,8 @@ function initialize() {
           title: '<%= school.name %>',
           icon: 'electric.png'
       });
-        var contentString<%= school.id %> = '<div id="content"><h4><%= school.name %></h4></div>';
+        <% !school.access.to_s.empty? ? school_link = "<a href=#{school.access} target=_BLANK>#{school.name}</a>" : school_link = "#{school.name}"%>
+        var contentString<%= school.id %> = '<div id="content"><h4><%= raw(school_link) %></h4><h5><%= school_distance%> feet from proposed 270 Kilovolt Power Lines</h5></div>';
         var infowindow<%= school.id %> = new google.maps.InfoWindow({
                   content: contentString<%= school.id %>
         });
