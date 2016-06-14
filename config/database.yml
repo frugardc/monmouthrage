@@ -5,10 +5,10 @@
 #   gem 'sqlite3'
 development:
   adapter: postgis
-  database: d4eals1alojl02
-  username: jhbdpmdnogvmim
-  password: wlaXYStPtV-xJlNpa_ZCpn7iSU
-  host: ec2-54-235-254-56.compute-1.amazonaws.com
+  database: dfms2v04ta58b0
+  username: uctxpihkgehhgf
+  password: DvuphqbAF9EIVdwvapd2YzHwJ1
+  host: ec2-54-235-111-59.compute-1.amazonaws.com
   pool: 500
   timeout: 5000
   sslmode: "require"
@@ -29,10 +29,10 @@ test:
 
 production:
   adapter: postgis
-  database: d4eals1alojl02
-  username: jhbdpmdnogvmim
-  password: wlaXYStPtV-xJlNpa_ZCpn7iSU
-  host: ec2-54-235-254-56.compute-1.amazonaws.com
+  database: dfms2v04ta58b0
+  username: uctxpihkgehhgf
+  password: DvuphqbAF9EIVdwvapd2YzHwJ1
+  host: ec2-54-235-111-59.compute-1.amazonaws.com
   pool: 500
   timeout: 5000
   sslmode: "require"
