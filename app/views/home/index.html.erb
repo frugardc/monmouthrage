@@ -96,6 +96,9 @@ function initialize() {
       });
       <%= raw(school_line_string) %>
   <% end %>
+  <% @power_parcels.each do |parcel|%>
+      <%= raw(parcel.to_placemark) %>
+  <% end %>
   <% if @result %>
     var marker = new google.maps.Marker({
             position: new google.maps.LatLng( <%= @result.latitude%>,<%=@result.longitude %>),
