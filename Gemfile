@@ -23,8 +23,7 @@ end
 gem 'geocoder'
 gem 'jquery-rails'
 gem 'prawn'
-gem 'impressionist', :branch => "master"
-
+gem 'impressionist',:git => "https://github.com/charlotte-ruby/impressionist.git",:branch => "master"
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
