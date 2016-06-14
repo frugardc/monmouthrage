@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  impressionist
   def index
     @address = params[:address]
     @geocodes = Geocoder.search(@address)
