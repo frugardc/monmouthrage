@@ -15,7 +15,7 @@
     <% unless @result %>
       <p class="lead">Wonder how close you really are?  Enter your address below and click "Enter"</p>
     <% else %>
-      <p class="lead">Your location approximately <%= @power_line_distance %> feet from the proposed 240 Kilovolt Power Lines</p>
+      <p class="lead">Your location is approximately <%= @power_line_distance %> feet from the proposed 240 Kilovolt Power Lines</p>
     <% end %>
     <div class="row">
       <div class="col-lg-10">
@@ -87,7 +87,7 @@ function initialize() {
           icon: 'electric.png'
       });
         <% !school.access.to_s.empty? ? school_link = "<a href=#{school.access} target=_BLANK>#{school.name}</a>" : school_link = "#{school.name}"%>
-        var contentString<%= school.id %> = '<div id="content"><h4><%= raw(school_link) %></h4><h5><%= school_distance%> feet from proposed 270 Kilovolt Power Lines</h5></div>';
+        var contentString<%= school.id %> = '<div id="content"><h4><%= raw(school_link) %></h4><h5><%= school_distance%> feet from proposed 240 Kilovolt Power Lines</h5></div>';
         var infowindow<%= school.id %> = new google.maps.InfoWindow({
                   content: contentString<%= school.id %>
         });

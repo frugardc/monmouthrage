@@ -14,10 +14,10 @@ class PowerParcel < ActiveRecord::Base
       path: path#{objectid},
       geodesic: true,
       strokeColor: '#FF0000',
-      strokeOpacity: 1.0,
-      strokeWeight: 2,
+      strokeOpacity: 0.75,
+      strokeWeight: 1,
       fillColor: '#FF0000',
-      fillOpacity: 0.35
+      fillOpacity: 0.15
     });
     parcelPath#{objectid}.setMap(#{mapid});
     "
