@@ -5,9 +5,8 @@ class HomeController < ApplicationController
     @result = @geocodes.first
     @power_line = PowerLine.first
     @full_url = request.original_url
-    @power_parcels = Rails.cache.fetch("all_parcel_recs") do
-      PowerParcel.all
-    end
+    @power_parcels = PowerParcel.all
+    @power_parcel_placemarks = PowerParcel.all_placemarks
     if @result
       @power_line_data = @power_line.to_distance_placemark(@result.latitude,@result.longitude,true)
       @power_line_string = @power_line_data[0]

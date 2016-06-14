@@ -55,8 +55,12 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.25.1)
     multi_json (1.12.1)
+    pdf-core (0.6.1)
     pg (0.18.4)
     polyglot (0.3.5)
+    prawn (2.1.0)
+      pdf-core (~> 0.6.1)
+      ttfunk (~> 1.4.0)
     rack (1.4.7)
     rack-cache (1.6.1)
       rack (>= 0.4)
@@ -102,6 +106,7 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
+    ttfunk (1.4.0)
     tzinfo (0.3.49)
     uglifier (3.0.0)
       execjs (>= 0.3.0, < 3)
@@ -115,6 +120,7 @@ DEPENDENCIES
   geocoder
   jquery-rails
   pg
+  prawn
   rails (= 3.2.22.2)
   rgeo
   sass-rails (~> 3.2.3)
