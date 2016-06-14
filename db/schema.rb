@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160614164758) do
+ActiveRecord::Schema.define(:version => 20160614171021) do
 
   create_table "impressions", :force => true do |t|
     t.string   "impressionable_type"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(:version => 20160614164758) do
     t.text     "referrer"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
+    t.string   "params"
   end
 
   create_table "power_lines", :force => true do |t|
