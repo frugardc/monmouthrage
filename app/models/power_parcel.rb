@@ -105,9 +105,9 @@ class PowerParcel < ActiveRecord::Base
 
       Here is the good news.
 
-      There is still time to stop this madness.  JCP&L is currently is about to apply for the permits to begin work.  You can
+      There is still time to stop this madness.  JCP&L is about to apply for the permits to begin work.  You can
       join the fight.  Join the Facebook Group.  Call the Mayor.  Call your representatives.  Spread the word.  Talk to your neighbors.  Unless we make a stand, JCP&L will make
-      and eyesore out of our beatiful towns in the name of unimpeded progress.  Many of us are unwilling to allow that to happen.  Will you join the fight?
+      and eyesore out of our beautiful towns in the name of unimpeded progress.  Many of us are unwilling to allow that to happen.  Will you join the fight?
     "
 
     pdf.move_down 20
