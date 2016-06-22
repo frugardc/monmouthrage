@@ -1,28 +1,33 @@
 <div id="googleMap"></div>
 
 <div class="search-results">
-  <img src="rage-logo-bordered.png" class="logo">
-  <h2>How close are you to the proposed monster power lines?</h2>
-  <% unless @result %>
-      <p>Enter your address below and hit "Enter".</p>
-    <% else %>
-      <p class="lead">Your location is approximately <%= @power_line_distance %> feet from the proposed 230 Kilovolt Power Lines</p>
-    <% end %>
-    <form action="/" method="GET">
-      <div class="input-group">
-        <span class="input-group-btn">
-          <button class="btn btn-default" type="submit">Estimate Distance:</button>
-        </span>
-        <input type="text" name="address" class="form-control" placeholder="My Address..." value="<%= @result ? @result.address : '' %>">
-        <% if @result %>
+  <a href="http://www.stopjcpl.org/"><img src="rage-logo-bordered.png" class="logo" alt="R.A.G.E. Residents Against Giant Electric"></a>
+  <div class="search-fields">
+    <h3>How close are you to the proposed monster power lines?</h3>
+    <% unless @result %>
+        <p>Enter your address below and hit "Enter".</p>
+      <% else %>
+        <p class="lead">Your are about <%= @power_line_distance %> ft from the proposed 230 Kilovolt Lines</p>
+      <% end %>
+      <form action="/" method="GET">
+        <div class="input-group">
           <span class="input-group-btn">
-            <button class="btn btn-default clip-btn" type="button" data-clipboard-text="<%= @full_url %>">
-              Copy Link to Share
-            </button>
+            <button class="btn btn-default" type="submit">Estimate Distance:</button>
           </span>
-        <% end %>
-      </div>
-    </form>
+          <input type="text" name="address" class="form-control" placeholder="My Address..." value="<%= @result ? @result.address : '' %>">
+          <% if @result %>
+            <span class="input-group-btn">
+              <button class="btn btn-default clip-btn" id="share-button" type="button" data-clipboard-text="<%= @full_url %>">
+                Copy Link to Share
+              </button>
+            </span>
+          <% end %>
+        </div>
+      </form>
+    </div>
+    <div class="get-involved-footer">
+      Visit <a href="http://www.stopjcpl.org/">stopjcpl.org</a> for more info and to <strong>get involved</strong>.
+    </div>
 </div>
 
 <script>
