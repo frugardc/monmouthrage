@@ -45,7 +45,7 @@ function initialize() {
           icon: 'electric.png'
       });
         <% !school.access.to_s.empty? ? school_link = "<a href=#{school.access} target=_BLANK>#{school.name}</a>" : school_link = "#{school.name}"%>
-        var contentString<%= school.id %> = '<div id="content"><h4><%= raw(school_link) %></h4><h5><%= school_distance%> feet from proposed 240 Kilovolt Power Lines</h5></div>';
+        var contentString<%= school.id %> = '<div id="content"><h4><%= raw(school_link) %></h4><h5><%= school_distance%> feet from proposed 230 Kilovolt Power Lines</h5></div>';
         var infowindow<%= school.id %> = new google.maps.InfoWindow({
                   content: contentString<%= school.id %>
         });
