@@ -7,7 +7,7 @@
     <% unless @result %>
         <p>Enter your address below and hit "Enter".</p>
       <% else %>
-        <p class="lead">Your are about <%= @power_line_distance %> ft from the proposed 230 Kilovolt Lines</p>
+        <p class="lead">Your location is about <%= @power_line_distance %> ft from the proposed 230 Kilovolt Line Route.</p>
       <% end %>
       <form action="/" method="GET">
         <div class="input-group">
